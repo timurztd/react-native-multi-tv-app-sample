@@ -6,33 +6,20 @@ function withKotlinJvmTarget(config) {
   return withDangerousMod(config, [
     "android",
     async (config) => {
-      const buildGradlePath = path.join(
+      const rootBuildGradle = path.join(
         config.modRequest.platformProjectRoot,
-        "react-settings-plugin",
-        "build.gradle.kts"
+        "build.gradle"
       );
 
-      if (fs.existsSync(buildGradlePath)) {
-        let contents = fs.readFileSync(buildGradlePath, "utf-8");
+      if (fs.existsSync(rootBuildGradle)) {
+        let contents = fs.readFileSync(rootBuildGradle, "utf-8");
 
-        if (!contents.includes("sourceCompatibility")) {
-          const jvmConfig = `
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-}
-`;
+        if (!contents.includes("ext.kotlinVersion")) {
           contents = contents.replace(
-            /repositories\s*\{\s*mavenCentral\(\)\s*\}/,
-            (match) => match + "\n" + jvmConfig
+            "buildscript {",
+            'buildscript {\n  ext.kotlinVersion = findProperty("android.kotlinVersion") ?: "2.0.21"'
           );
-          fs.writeFileSync(buildGradlePath, contents);
+          fs.writeFileSync(rootBuildGradle, contents);
         }
       }
 
