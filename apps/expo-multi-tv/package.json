@@ -19,7 +19,6 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@bam.tech/react-native-keyevent-expo-config-plugin": "^1.0.50",
     "@expo/metro-runtime": "~4.0.0",
     "@expo/vector-icons": "^14.0.0",
     "@multi-tv/shared-ui": "workspace:*",
