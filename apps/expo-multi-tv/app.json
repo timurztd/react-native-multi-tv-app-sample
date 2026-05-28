@@ -4,7 +4,6 @@
       "./plugins/withKotlinJvmTarget",
       "./plugins/withKeyEvent",
       "./plugins/withTvosDeploymentTarget",
-      "./plugins/withFmtXcode26Fix",
       [
         "@react-native-tvos/config-tv",
         {
@@ -48,7 +47,8 @@
             "useExoplayerDash": false
           }
         }
-      ]
+      ],
+      "./plugins/withFmtXcode26Fix"
     ],
     "name": "MultiTVSample",
     "slug": "MultiTVSample",

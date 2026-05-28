@@ -12,13 +12,16 @@ function withFmtXcode26Fix(config) {
       );
       let podfile = fs.readFileSync(podfilePath, "utf8");
 
+      if (podfile.includes("CLANG_CXX_LANGUAGE_STANDARD") && podfile.includes("fmt")) {
+        return config;
+      }
+
       const fmtFix = `
-    # Fix fmt consteval errors on Xcode 26+
+    # Fix fmt consteval errors on Xcode 26+ by compiling fmt with C++17
     installer.pods_project.targets.each do |target|
       if target.name == 'fmt'
-        target.build_configurations.each do |config|
-          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
-          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'FMT_CONSTEVAL=constexpr'
+        target.build_configurations.each do |bc|
+          bc.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
         end
       end
     end`;
