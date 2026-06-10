@@ -16,9 +16,7 @@ web-build/
 # Package managers
 package-lock.json
 yarn-error.log
-.yarn/cache
+.yarn
 
 # macOS
 .DS_Store
-
-

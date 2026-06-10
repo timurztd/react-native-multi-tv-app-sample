@@ -4,7 +4,10 @@
     "rootDir": "./src",
     "declaration": true,
     "declarationMap": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "lib": ["es2019", "dom", "dom.iterable"],
+    "types": ["node", "react", "react-native"],
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]

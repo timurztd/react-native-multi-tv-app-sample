@@ -45,7 +45,7 @@ const VideoPlayer = React.memo(
             : {
                 source: { uri: headerImage },
                 resizeMode: "cover" as const,
-                style: { width: "100%", height: "100%" },
+                style: videoPlayerStyles.poster,
               },
         [headerImage],
       );
@@ -81,6 +81,10 @@ const VideoPlayer = React.memo(
 const videoPlayerStyles = StyleSheet.create({
   video: {
     width: "100%",
+  },
+  poster: {
+    width: "100%",
+    height: "100%",
   },
 });
 
